@@ -1,60 +1,8 @@
 import { Order, MenuItem, InventoryItem, Customer } from '@/types';
 
-export const mockOrders: Order[] = [
-  {
-    id: '2403',
-    customerName: 'Rahul Verma',
-    items: [
-      { id: 'm1', name: 'Peri-Peri Pizza', quantity: 2, price: 389 },
-      { id: 'm11', name: 'Mango Lassi', quantity: 2, price: 129 }
-    ],
-    totalAmount: 1036,
-    status: 'Delayed',
-    createdAt: new Date(Date.now() - 35 * 60000).toISOString(),
-  },
-  {
-    id: '2402',
-    customerName: 'Priya Sharma',
-    items: [
-      { id: 'm3', name: 'Butter Chicken', quantity: 1, price: 349 },
-      { id: 'm6', name: 'Garlic Bread', quantity: 1, price: 149 }
-    ],
-    totalAmount: 498,
-    status: 'Preparing',
-    createdAt: new Date(Date.now() - 15 * 60000).toISOString(),
-  },
-  {
-    id: '2401',
-    customerName: 'Arjun Mehta',
-    items: [
-      { id: 'm4', name: 'Chicken Biryani', quantity: 2, price: 329 }
-    ],
-    totalAmount: 658,
-    status: 'Delayed',
-    createdAt: new Date(Date.now() - 40 * 60000).toISOString(),
-  },
-  {
-    id: '2400',
-    customerName: 'Sneha Patel',
-    items: [
-      { id: 'm2', name: 'Margherita Pizza', quantity: 1, price: 299 },
-      { id: 'm7', name: 'Loaded Fries', quantity: 1, price: 189 }
-    ],
-    totalAmount: 488,
-    status: 'Ready',
-    createdAt: new Date(Date.now() - 25 * 60000).toISOString(),
-  },
-  {
-    id: '2399',
-    customerName: 'Kiran Reddy',
-    items: [
-      { id: 'm5', name: 'Paneer Tikka', quantity: 2, price: 279 }
-    ],
-    totalAmount: 558,
-    status: 'Delivered',
-    createdAt: new Date(Date.now() - 60 * 60000).toISOString(),
-  }
-];
+// Helper functions for dynamic relative dates
+const hoursAgo = (hours: number) => new Date(Date.now() - hours * 3600000).toISOString();
+const daysAgo = (days: number, hoursOffset: number = 0) => new Date(Date.now() - days * 86400000 - hoursOffset * 3600000).toISOString();
 
 export const mockMenuItems: MenuItem[] = [
   { id: 'm1', name: 'Peri-Peri Pizza', category: 'Pizza', price: 389, rating: 4.7, available: true },
@@ -85,11 +33,11 @@ export const mockInventory: InventoryItem[] = [
 ];
 
 export const mockCustomers: Customer[] = [
-  { id: 'c1', name: 'Priya Sharma', ordersCount: 14, totalSpend: 5400, favoriteDish: 'Butter Chicken', lastOrderAt: new Date(Date.now() - 2 * 86400000).toISOString(), segment: 'VIP' },
-  { id: 'c2', name: 'Arjun Mehta', ordersCount: 8, totalSpend: 3200, favoriteDish: 'Chicken Biryani', lastOrderAt: new Date(Date.now() - 5 * 86400000).toISOString(), segment: 'Regular' },
-  { id: 'c3', name: 'Rahul Verma', ordersCount: 22, totalSpend: 9800, favoriteDish: 'Peri-Peri Pizza', lastOrderAt: new Date().toISOString(), segment: 'VIP' },
-  { id: 'c4', name: 'Sneha Patel', ordersCount: 1, totalSpend: 488, favoriteDish: 'Margherita Pizza', lastOrderAt: new Date().toISOString(), segment: 'New' },
-  { id: 'c5', name: 'Kiran Reddy', ordersCount: 12, totalSpend: 4500, favoriteDish: 'Paneer Tikka', lastOrderAt: new Date(Date.now() - 17 * 86400000).toISOString(), segment: 'At Risk' },
+  { id: 'c1', name: 'Priya Sharma', ordersCount: 14, totalSpend: 5400, favoriteDish: 'Butter Chicken', lastOrderAt: daysAgo(2), segment: 'VIP' },
+  { id: 'c2', name: 'Arjun Mehta', ordersCount: 8, totalSpend: 3200, favoriteDish: 'Chicken Biryani', lastOrderAt: daysAgo(5), segment: 'Regular' },
+  { id: 'c3', name: 'Rahul Verma', ordersCount: 22, totalSpend: 9800, favoriteDish: 'Peri-Peri Pizza', lastOrderAt: hoursAgo(1), segment: 'VIP' },
+  { id: 'c4', name: 'Sneha Patel', ordersCount: 1, totalSpend: 488, favoriteDish: 'Margherita Pizza', lastOrderAt: hoursAgo(2), segment: 'New' },
+  { id: 'c5', name: 'Kiran Reddy', ordersCount: 12, totalSpend: 4500, favoriteDish: 'Paneer Tikka', lastOrderAt: daysAgo(17), segment: 'At Risk' },
 ];
 
 export const mockAiInsights = [
@@ -99,7 +47,7 @@ export const mockAiInsights = [
     type: 'warning' as const,
     insight: 'Tandoor station is reaching 82% capacity. 3 Butter Chicken and 2 Paneer Tikka pending.',
     actionable: true,
-    createdAt: new Date(Date.now() - 5 * 60000).toISOString(),
+    createdAt: hoursAgo(0.1),
   },
   {
     id: 'ai-2',
@@ -107,7 +55,7 @@ export const mockAiInsights = [
     type: 'positive' as const,
     insight: 'Revenue tracking 12% higher than typical Tuesdays. Dinner rush expected between 7:30 PM - 9:30 PM.',
     actionable: false,
-    createdAt: new Date(Date.now() - 30 * 60000).toISOString(),
+    createdAt: hoursAgo(0.5),
   },
   {
     id: 'ai-3',
@@ -115,7 +63,7 @@ export const mockAiInsights = [
     type: 'warning' as const,
     insight: 'Amul Butter depletion rate spiked. Current stock will only last 1.1 days at this rate.',
     actionable: true,
-    createdAt: new Date(Date.now() - 120 * 60000).toISOString(),
+    createdAt: hoursAgo(2),
   },
   {
     id: 'ai-4',
@@ -123,6 +71,79 @@ export const mockAiInsights = [
     type: 'info' as const,
     insight: 'Recent negative review cluster (2) regarding delayed deliveries to Sector 56.',
     actionable: true,
-    createdAt: new Date(Date.now() - 180 * 60000).toISOString(),
+    createdAt: hoursAgo(3),
   }
+];
+
+const customerNames = ["Rahul Verma", "Priya Sharma", "Arjun Mehta", "Sneha Patel", "Kiran Reddy", "Anjali Deshmukh", "Vikram Singh", "Siddharth Rao", "Nisha Gupta", "Rohan Das"];
+const baseStatuses = ['New', 'Preparing', 'Ready', 'Delivered', 'Delayed'];
+
+const generateRandomOrders = (count: number): Order[] => {
+  return Array.from({ length: count }).map((_, idx) => {
+    // Generate dates clustering around now and previous days
+    const isToday = idx < 20; // First 20 orders are today
+    const dateStr = isToday
+      ? hoursAgo(Math.random() * 8) // spread across last 8 hours
+      : daysAgo(Math.floor(Math.random() * 5) + 1, Math.random() * 12);
+
+    // Pick 1 to 3 random items
+    const numItems = Math.floor(Math.random() * 3) + 1;
+    const items = [];
+    let totalAmount = 0;
+
+    for (let j = 0; j < numItems; j++) {
+      const dbItem = mockMenuItems[Math.floor(Math.random() * mockMenuItems.length)];
+      const qty = Math.floor(Math.random() * 2) + 1;
+      items.push({
+        id: dbItem.id,
+        name: dbItem.name,
+        quantity: qty,
+        price: dbItem.price
+      });
+      totalAmount += (dbItem.price * qty);
+    }
+
+    // Determine realistic status based on time
+    let status = 'Delivered';
+    if (isToday) {
+      if (idx < 2) status = 'New';
+      else if (idx < 6) status = 'Preparing';
+      else if (idx < 8) status = 'Ready';
+      else if (idx === 8) status = 'Delayed';
+    }
+
+    return {
+      id: (2404 + idx).toString(),
+      customerName: customerNames[Math.floor(Math.random() * customerNames.length)],
+      items,
+      totalAmount,
+      status: status as Order['status'], // Coerce type here
+      createdAt: dateStr,
+    };
+  });
+};
+
+export const mockOrders: Order[] = generateRandomOrders(50);
+
+export interface Review {
+  id: string;
+  customerName: string;
+  rating: number;
+  comment: string;
+  sentiment: 'Positive' | 'Neutral' | 'Negative';
+  topic: string;
+  createdAt: string;
+}
+
+export const mockReviews: Review[] = [
+  { id: 'r1', customerName: 'Priya S.', rating: 5, comment: 'Absolutely loved the Butter Chicken! Will order again.', sentiment: 'Positive', topic: 'Food Quality', createdAt: hoursAgo(2) },
+  { id: 'r2', customerName: 'Rohan D.', rating: 2, comment: 'Delivery was 40 mins late and food was cold.', sentiment: 'Negative', topic: 'Delivery Speed', createdAt: hoursAgo(5) },
+  { id: 'r3', customerName: 'Sneha P.', rating: 4, comment: 'Great portion sizes, really worth the price.', sentiment: 'Positive', topic: 'Portion Size', createdAt: daysAgo(1) },
+  { id: 'r4', customerName: 'Vikram S.', rating: 3, comment: 'Pizza was slightly burnt on the edges today.', sentiment: 'Neutral', topic: 'Food Quality', createdAt: daysAgo(1, 4) },
+  { id: 'r5', customerName: 'Anjali D.', rating: 5, comment: 'Best packaging I have seen from any restaurant.', sentiment: 'Positive', topic: 'Packaging', createdAt: daysAgo(2) },
+  { id: 'r6', customerName: 'Arjun M.', rating: 1, comment: 'Forgot to send the extra garlic sauce I paid for.', sentiment: 'Negative', topic: 'Accuracy', createdAt: daysAgo(2, 6) },
+  { id: 'r7', customerName: 'Kiran R.', rating: 5, comment: 'Consistent quality as always.', sentiment: 'Positive', topic: 'Food Quality', createdAt: daysAgo(3) },
+  { id: 'r8', customerName: 'Siddharth R.', rating: 4, comment: 'Good food, but the app crashed once while ordering.', sentiment: 'Neutral', topic: 'App Experience', createdAt: daysAgo(3, 10) },
+  { id: 'r9', customerName: 'Nisha G.', rating: 5, comment: 'The new mango lassi is heavenly!', sentiment: 'Positive', topic: 'Menu Items', createdAt: daysAgo(4) },
+  { id: 'r10', customerName: 'Rahul V.', rating: 5, comment: 'Fast delivery, hot food. Perfect.', sentiment: 'Positive', topic: 'Delivery Speed', createdAt: daysAgo(4, 3) },
 ];
