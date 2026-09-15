@@ -287,10 +287,10 @@ export default function CustomersPage() {
         <CardHeader title="Customer Segment Distribution" subtitle="Distribution across lifecycle stages" />
         <div className="space-y-3">
           {[
-            { segment: 'VIP (High LTV)', count: stats.vip, percentage: Math.round((stats.vip / mockCustomers.length) * 100), color: 'nora-accent' },
-            { segment: 'Regulars', count: stats.regular, percentage: Math.round((stats.regular / mockCustomers.length) * 100), color: 'coral' },
-            { segment: 'New Walk-ins', count: stats.new, percentage: Math.round((stats.new / mockCustomers.length) * 100), color: 'nora-success' },
-            { segment: 'At Risk', count: stats.atRisk, percentage: Math.round((stats.atRisk / mockCustomers.length) * 100), color: 'nora-danger' },
+            { segment: 'VIP (High LTV)', count: stats.vip, percentage: Math.round((stats.vip / mockCustomers.length) * 100), colorClass: 'bg-nora-accent' },
+            { segment: 'Regulars', count: stats.regular, percentage: Math.round((stats.regular / mockCustomers.length) * 100), colorClass: 'bg-coral' },
+            { segment: 'New Walk-ins', count: stats.new, percentage: Math.round((stats.new / mockCustomers.length) * 100), colorClass: 'bg-nora-success' },
+            { segment: 'At Risk', count: stats.atRisk, percentage: Math.round((stats.atRisk / mockCustomers.length) * 100), colorClass: 'bg-nora-danger' },
           ].map((item, i) => (
             <div key={i}>
               <div className="flex justify-between text-sm mb-1 font-medium">
@@ -299,7 +299,7 @@ export default function CustomersPage() {
               </div>
               <div className="w-full bg-nora-border rounded-full h-2 overflow-hidden">
                 <div
-                  className={`bg-${item.color} h-2 rounded-full transition-all duration-500`}
+                  className={cn("h-2 rounded-full transition-all duration-500", item.colorClass)}
                   style={{ width: `${item.percentage}%` }}
                 />
               </div>

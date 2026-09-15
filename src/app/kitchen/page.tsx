@@ -76,11 +76,11 @@ export default function KitchenPage() {
 
   // Station load data
   const stationLoads = [
-    { name: 'Tandoor', load: 82, items: 6, color: 'nora-danger' },
-    { name: 'Curry', load: 65, items: 4, color: 'nora-amber' },
-    { name: 'Grill', load: 40, items: 2, color: 'nora-success' },
-    { name: 'Beverage', load: 25, items: 2, color: 'nora-success' },
-    { name: 'Dessert', load: 15, items: 1, color: 'nora-success' },
+    { name: 'Tandoor', load: 82, items: 6, colorClass: { text: 'text-nora-danger', bg: 'bg-nora-danger' } },
+    { name: 'Curry', load: 65, items: 4, colorClass: { text: 'text-nora-amber', bg: 'bg-nora-amber' } },
+    { name: 'Grill', load: 40, items: 2, colorClass: { text: 'text-nora-success', bg: 'bg-nora-success' } },
+    { name: 'Beverage', load: 25, items: 2, colorClass: { text: 'text-nora-success', bg: 'bg-nora-success' } },
+    { name: 'Dessert', load: 15, items: 1, colorClass: { text: 'text-nora-success', bg: 'bg-nora-success' } },
   ];
 
   const totalItemsInPrep = kitchenOrders
@@ -112,11 +112,11 @@ export default function KitchenPage() {
           <Card key={station.name} className="!p-3">
             <div className="flex justify-between items-center mb-2">
               <span className="text-xs font-semibold text-nora-muted uppercase tracking-wider">{station.name}</span>
-              <span className={`text-xs font-bold text-${station.color}`}>{station.load}%</span>
+              <span className={cn("text-xs font-bold", station.colorClass.text)}>{station.load}%</span>
             </div>
             <div className="w-full bg-nora-border rounded-full h-1.5 overflow-hidden">
               <div
-                className={`bg-${station.color} h-1.5 rounded-full transition-all duration-500`}
+                className={cn("h-1.5 rounded-full transition-all duration-500", station.colorClass.bg)}
                 style={{ width: `${station.load}%` }}
               />
             </div>
