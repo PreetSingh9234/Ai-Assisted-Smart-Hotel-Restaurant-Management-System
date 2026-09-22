@@ -35,15 +35,15 @@ A modern, comprehensive, and AI-powered management dashboard designed for hotels
 ## 📸 Screenshots
 
 ### Main Dashboard
-![Dashboard](https://placehold.co/1000x500/0f172a/ffffff?text=Main+Dashboard+View)
+![Dashboard](docs/images/dashboard.png)
 *Real-time overview of your restaurant's performance.*
 
 ### N.O.R.A AI Assistant
-![NORA AI](https://placehold.co/1000x500/0f172a/ffffff?text=N.O.R.A+AI+Chat)
+![NORA AI](docs/images/nora.png)
 *Get instant operational insights from N.O.R.A.*
 
 ### Predictive Analytics
-![Analytics](https://placehold.co/1000x500/0f172a/ffffff?text=Predictive+Analytics)
+![Analytics](docs/images/analytics.png)
 *AI-driven sales forecasts and inventory predictions.*
 
 ---
