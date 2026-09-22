@@ -50,3 +50,16 @@ export async function getCustomers(): Promise<Customer[]> {
     return mockCustomers;
   }
 }
+
+export async function getAnalytics(): Promise<any> {
+  try {
+    const endpoint = BASE ? `${BASE}/analytics` : '/api/analytics';
+    const res = await fetch(endpoint, { cache: 'no-store' });
+    if (!res.ok) throw new Error('Failed to fetch analytics');
+    return res.json();
+  } catch (error) {
+    console.error('[getAnalytics]', error);
+    return null;
+  }
+}
+

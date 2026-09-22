@@ -77,11 +77,20 @@ export function NoraProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
 
     try {
-      // Call mock or backend API
+      // Build conversation history for multi-turn context (exclude welcome message)
+      const currentMessages = [...messages, userMsg];
+      const history = currentMessages
+        .filter(m => m.id !== 'welcome')
+        .slice(-20) // last 20 messages max
+        .map(m => ({
+          role: m.sender === 'user' ? 'user' as const : 'assistant' as const,
+          content: m.text,
+        }));
+
       const res = await fetch('/api/nora', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text }),
+        body: JSON.stringify({ message: text, history }),
       });
 
       if (!res.ok) throw new Error('Failed to get response');
@@ -90,7 +99,7 @@ export function NoraProvider({ children }: { children: ReactNode }) {
       const aiMsg: NoraMessage = {
         id: `nora-${Date.now()}`,
         sender: 'nora',
-        text: data.reply || "I've analyzed the real-time restaurant metrics. Kitchen orders are currently within safe SLA thresholds (avg prep time: 18m).",
+        text: data.response ?? data.reply ?? "I've analyzed the restaurant metrics. Everything looks within normal thresholds.",
         timestamp: new Date().toISOString(),
       };
 

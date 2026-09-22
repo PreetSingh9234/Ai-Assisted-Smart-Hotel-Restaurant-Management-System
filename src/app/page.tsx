@@ -59,8 +59,10 @@ export default function DashboardPage() {
       {/* 1. Restaurant Health Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
         <div>
-          <h1 className="text-2xl font-bold text-nora-text tracking-tight">Rajdarbar Unified Dashboard</h1>
-          <p className="text-nora-muted">Command center for your entire operations.</p>
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-bold text-nora-text tracking-tight">Rajdarbar Unified Dashboard</h1>
+          </div>
+          <p className="text-nora-muted">Command center for Pritam Singh • Real-time restaurant intelligence.</p>
         </div>
         <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-nora-border shadow-sm">
           <span className="text-sm font-medium">System Health:</span>

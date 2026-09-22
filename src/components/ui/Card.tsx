@@ -24,14 +24,28 @@ export function Card({ children, className, noPadding = false, ...props }: CardP
   );
 }
 
-export function CardHeader({ title, subtitle, action, className }: { title: React.ReactNode, subtitle?: React.ReactNode, action?: React.ReactNode, className?: string }) {
+export function CardHeader({
+  title,
+  subtitle,
+  description,
+  action,
+  className
+}: {
+  title: React.ReactNode;
+  subtitle?: React.ReactNode;
+  description?: React.ReactNode;
+  action?: React.ReactNode;
+  className?: string;
+}) {
+  const sub = subtitle ?? description;
   return (
     <div className={cn("flex justify-between items-start mb-4", className)}>
       <div>
         <h3 className="font-semibold text-nora-text">{title}</h3>
-        {subtitle && <p className="text-sm text-nora-muted">{subtitle}</p>}
+        {sub && <p className="text-sm text-nora-muted">{sub}</p>}
       </div>
       {action && <div>{action}</div>}
     </div>
   );
 }
+
