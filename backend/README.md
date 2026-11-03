@@ -1,4 +1,4 @@
-# 🏨 Rajdarbar Restaurant Management System — Backend Service
+# 🏨 CraveVarse - AI Assisted Advanced Restaurant Management System — Backend Service
 
 A high-performance **FastAPI** backend service integrated with **Groq LLM (NORA AI)** and an embedded **SQLite** database engine.
 
